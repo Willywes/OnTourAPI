@@ -26,7 +26,7 @@ class RolController extends Controller
      */
     public function show($id)
     {
-        return Rol::select('id', 'nombre')->orderBy('nombre')->get();
+        return Rol::select('id', 'nombre')->orderBy('nombre')->find($id);
     }
 
 

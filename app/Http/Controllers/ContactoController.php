@@ -10,8 +10,8 @@ class ContactoController extends Controller
     public function guardarSPS(Request $request){
 
         try{
-            $contrato = Contrato::create($request->all());
-            if($contrato){
+            $contacto = Contacto::create($request->all());
+            if($contacto){
                 return response()->json([
                     "status" => "success",
                     "message" => "Mensaje enviado correctamente."

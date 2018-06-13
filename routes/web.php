@@ -56,3 +56,6 @@ Route::delete('usuarios/{id}', 'UserController@delete');
 //ROLES
 Route::get('roles', 'RolController@index');
 Route::get('roles/{id}', 'RolController@show');
+
+
+Route::post('sps','ContactoController@guardarSPS');

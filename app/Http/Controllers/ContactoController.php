@@ -24,7 +24,7 @@ class ContactoController extends Controller
         }catch(\Exception $ex){
             return response()->json([
                 "status" => "error",
-                "message" => "Error en de exception."
+                "message" => "Error en de exception. " . $ex
             ]);
         }
 

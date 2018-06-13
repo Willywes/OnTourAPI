@@ -33,4 +33,4 @@ Route::delete('usuarios/{id}', 'UserController@delete');
 //Route::put('articles/{id}', 'ArticleController@update');
 //Route::delete('articles/{id}', 'ArticleController@delete');*/
 
-Route::post('sps','ContactoController@guardarSPS');
+//Route::post('sps','ContactoController@guardarSPS');

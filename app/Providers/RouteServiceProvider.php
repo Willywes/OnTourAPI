@@ -71,12 +71,13 @@ class RouteServiceProvider extends ServiceProvider
              ->group(base_path('routes/api.php'));*/
 
         Route::group([
-             'middleware' => ['api', 'cors'],
-             'namespace' => $this->namespace,
-             'prefix' => 'api',
+            'middleware' => ['api', 'cors'],
+            'namespace' => $this->namespace,
+            'prefix' => 'api',
         ], function ($router) {
-             //Add you routes here, for example:
-             Route::apiResource('/posts','PostController');
+            //Add you routes here, for example:
+            //Route::apiResource('/posts','PostController');
+            Route::post('sps','ContactoController@guardarSPS');
         });
     }
 }

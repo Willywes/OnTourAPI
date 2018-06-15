@@ -29,4 +29,8 @@ class ContactoController extends Controller
         }
 
     }
+
+    public function getList(){
+        return Contacto::all();
+    }
 }

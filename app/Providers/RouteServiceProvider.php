@@ -78,6 +78,8 @@ class RouteServiceProvider extends ServiceProvider
             //Add you routes here, for example:
             //Route::apiResource('/posts','PostController');
             Route::post('sps','ContactoController@guardarSPS');
+            Route::get('list','ContactoController@getList');
+
         });
     }
 }

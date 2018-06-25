@@ -14,7 +14,7 @@ class RolController extends Controller
      */
     public function index()
     {
-        return Rol::select('id', 'nombre')->orderBy('nombre')->get();
+        return Rol::select('id', 'nombre')->orderBy('nombre')->where('id', '!=', 1)->get();
     }
 
 

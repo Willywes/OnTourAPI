@@ -14,7 +14,7 @@ class ContratoController extends Controller
      */
     public function index()
     {
-        return Abono::all();
+        return Contrato::all();
     }
 
 

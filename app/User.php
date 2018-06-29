@@ -23,7 +23,8 @@ class User extends Authenticatable
         'nombres',
         'telefono',
         'celular',
-        'rol_id'
+        'rol_id',
+        'api_token'
     ];
 
     /**
@@ -38,5 +39,13 @@ class User extends Authenticatable
 
     public function rol(){
         return $this->belongsTo('App\Rol');
+    }
+
+    public function generateToken()
+    {
+        $this->api_token = str_random(60);
+        $this->save();
+
+        return $this->api_token;
     }
 }

@@ -20,4 +20,16 @@ class Contrato extends Model
         'created_at',
         'updated_at'
     ];
+
+    public function curso(){
+        return $this->belongsTo(Curso::class);
+    }
+
+    public function representante(){
+        return $this->belongsTo(User::class);
+    }
+
+    public function tour(){
+        return $this->belongsTo(Tour::class);
+    }
 }

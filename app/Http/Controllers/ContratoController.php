@@ -10,7 +10,7 @@ class ContratoController extends Controller
 {
     public function index()
     {
-        return Contrato::with('destino')->get();
+        return Contrato::all();
     }
 
     public function store(Request $request)

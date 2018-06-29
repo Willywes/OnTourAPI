@@ -8,23 +8,12 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         return User::with('rol')->get();
     }
 
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
 
@@ -37,37 +26,24 @@ class UserController extends Controller
         ];
 
         $messages = [
-            'rol_id.required' => 'Debes seleccionar un rol para el usuario'
+            'rol_id.required' => 'Debes seleccionar un rol para el usuario.'
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
 
         if ($validator->passes()) {
-            return ControllerUtils::successResponseJson(User::create($request->all()), "Registro creado correctamente.");
+            return ControllerUtils::successResponseJson(User::create($request->all()), "Usuario creado correctamente.");
 
         }else{
             return ControllerUtils::errorResponseValidation($validator);
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         return $user = User::find($id);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
 
@@ -79,7 +55,7 @@ class UserController extends Controller
         ];
 
         $messages = [
-            'rol_id.required' => 'Debes seleccionar un rol para el usuario'
+            'rol_id.required' => 'Debes seleccionar un rol para el usuario.'
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -95,12 +71,6 @@ class UserController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         try{

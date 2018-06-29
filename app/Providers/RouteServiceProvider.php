@@ -125,6 +125,15 @@ class RouteServiceProvider extends ServiceProvider
             Route::get('roles/{id}', 'RolController@show');
 
 
+
+//DESTINOS
+            Route::get('destinos', 'DestinoController@index');
+            Route::get('destinos/{id}', 'DestinoController@show');
+            Route::post('destinos', 'DestinoController@store');
+            Route::put('destinos/{id}', 'DestinoController@update');
+            Route::delete('destinos/{id}', 'DestinoController@destroy');
+
+
         });
     }
 }

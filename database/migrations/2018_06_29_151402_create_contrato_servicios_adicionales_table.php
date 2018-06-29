@@ -22,7 +22,6 @@ class CreateContratoServiciosAdicionalesTable extends Migration
             $table->integer('servicio_adicional_id')->unsigned()->unique();
             $table->foreign('servicio_adicional_id')->references('id')->on('servicios_adicionales')->onDelete('cascade');
 
-
             $table->timestamps();
         });
     }

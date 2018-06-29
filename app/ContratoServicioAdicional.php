@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class ContratoServicioAdicional extends Model
 {
-    //
+    //protected $dates = false;
 }

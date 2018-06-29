@@ -16,6 +16,8 @@ class CreateDestinosTable extends Migration
         Schema::create('destinos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre');
+            $table->text('descripcion')->nullable();
+            $table->text('foto')->nullable();
             $table->timestamps();
         });
     }

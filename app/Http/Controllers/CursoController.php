@@ -4,68 +4,77 @@ namespace App\Http\Controllers;
 
 use App\Curso;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CursoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         return Curso::all();
     }
 
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        return Curso::create($request->all());
+
+        $rules = [
+            'nombre' => 'required|min:4|string'
+        ];
+
+        $messages = [];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->passes()) {
+            return ControllerUtils::successResponseJson(Curso::create($request->all()), "Curso registrado correctamente.");
+
+        } else {
+            return ControllerUtils::errorResponseValidation($validator);
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         return Curso::find($id);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        $curso = Curso::findOrFail($id);
-        $curso->update($request->all());
 
-        return $curso;
+        $rules = [
+            'nombre' => 'required|min:4|string'
+        ];
+
+        $messages = [];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->passes()) {
+
+            $curso = Curso::findOrFail($id);
+            $curso->update($request->all());
+            return ControllerUtils::successResponseJson($curso, "Curso actualizado correctamente.");
+
+        } else {
+            return ControllerUtils::errorResponseValidation($validator);
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        $curso = Curso::findOrFail($id);
-        $curso->delete();
+        try {
+            $curso = Curso::find($id);
 
-        return 204;
+            if ($curso) {
+                $curso->delete();
+                return ControllerUtils::successResponseJson(null, "Curso eliminado correctamente.");
+            } else {
+                return ControllerUtils::errorResponseJson('El Curso a eliminar no éxiste.');
+            }
+
+
+        } catch (\Exception $e) {
+            return ControllerUtils::errorResponseJson('Error al eliminar el curso.');
+        }
+
     }
 }

@@ -31,6 +31,8 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
+
+        $this->load();
     }
 
     /**
@@ -41,5 +43,28 @@ class CreateUsersTable extends Migration
     public function down()
     {
         Schema::dropIfExists('users');
+    }
+
+    private function load()
+    {
+        $user = new App\User();
+
+        $user->email = 'super@admin.cl';
+        $user->password = bcrypt('admin123');
+        $user->nombres = 'Super';
+        $user->paterno = 'Admin';
+        $user->rol_id = 1;
+
+        $user->save();
+
+        $user = new App\User();
+
+        $user->email = 'admin@admin.cl';
+        $user->password = bcrypt('admin123');
+        $user->nombres = 'Admin';
+        $user->paterno = 'Admin';
+        $user->rol_id = 2;
+
+        $user->save();
     }
 }

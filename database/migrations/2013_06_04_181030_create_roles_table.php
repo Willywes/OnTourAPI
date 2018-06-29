@@ -18,6 +18,8 @@ class CreateRolesTable extends Migration
             $table->string('nombre');
             $table->timestamps();
         });
+
+        $this->load();
     }
 
     /**
@@ -28,5 +30,28 @@ class CreateRolesTable extends Migration
     public function down()
     {
         Schema::dropIfExists('rols');
+    }
+
+    private function load(){
+
+        $rol = new \App\Rol();
+        $rol->nombre = 'SuperAdmin';
+        $rol->save();
+
+        $rol = new \App\Rol();
+        $rol->nombre = 'Administrador';
+        $rol->save();
+
+        $rol = new \App\Rol();
+        $rol->nombre = 'Ejecutivo de Venta';
+        $rol->save();
+
+        $rol = new \App\Rol();
+        $rol->nombre = 'Encargado de Curso';
+        $rol->save();
+
+        $rol = new \App\Rol();
+        $rol->nombre = 'Apoderado';
+        $rol->save();
     }
 }

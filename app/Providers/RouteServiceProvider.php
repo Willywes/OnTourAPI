@@ -83,33 +83,7 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::post('register', 'Auth\RegisterController@register');
 
-//ABONO
-            Route::get('abonos', 'AbonoController@index');
-            Route::get('abonos/{id}', 'AbonoController@show');
-            Route::post('abonos', 'AbonoController@store');
-            Route::put('abonos/{id}', 'AbonoController@update');
-            Route::delete('abonos/{id}', 'AbonoController@destroy');
 
-//ALUMNO
-            Route::get('alumnos', 'AlumnoController@index');
-            Route::get('alumnos/{id}', 'AlumnoController@show');
-            Route::post('alumnos', 'AlumnoController@store');
-            Route::put('alumnos/{id}', 'AlumnoController@update');
-            Route::delete('alumnos/{id}', 'AlumnoController@destroy');
-
-//CONTRATO
-            Route::get('contratos', 'ContratoController@index');
-            Route::get('contratos/{id}', 'ContratoController@show');
-            Route::post('contratos', 'ContratoController@store');
-            Route::put('contratos/{id}', 'ContratoController@update');
-            Route::delete('contratos/{id}', 'ContratoController@destroy');
-
-//CURSO
-            Route::get('cursos', 'CursoController@index');
-            Route::get('cursos/{id}', 'CursoController@show');
-            Route::post('cursos', 'CursoController@store');
-            Route::put('cursos/{id}', 'CursoController@update');
-            Route::delete('cursos/{id}', 'CursoController@destroy');
 
 
 //USUARIOS
@@ -132,6 +106,13 @@ class RouteServiceProvider extends ServiceProvider
             Route::post('destinos', 'DestinoController@store');
             Route::put('destinos/{id}', 'DestinoController@update');
             Route::delete('destinos/{id}', 'DestinoController@destroy');
+
+//TOURS
+            Route::get('tours', 'TourController@index');
+            Route::get('tours/{id}', 'TourController@show');
+            Route::post('tours', 'TourController@store');
+            Route::put('tours/{id}', 'TourController@update');
+            Route::delete('tours/{id}', 'TourController@destroy');
 
 
         });

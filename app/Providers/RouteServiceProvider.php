@@ -118,6 +118,12 @@ class RouteServiceProvider extends ServiceProvider
             Route::put('servicios-adicionales/{id}', 'ServicioAdicionalController@update');
             Route::delete('servicios-adicionales/{id}', 'ServicioAdicionalController@destroy');
 
+//TOURS
+            Route::get('contratos', 'ContratoController@index');
+            Route::get('contratos/{id}', 'ContratoController@show');
+            Route::post('contratos', 'ContratoController@store');
+            Route::put('contratos/{id}', 'ContratoController@update');
+            Route::delete('contratos/{id}', 'ContratoController@destroy');
 
         });
     }

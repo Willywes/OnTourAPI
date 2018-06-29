@@ -7,65 +7,85 @@ use Illuminate\Http\Request;
 
 class ContratoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        return Contrato::all();
+        return Contrato::with('destino')->get();
     }
 
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        return Contrato::create($request->all());
+
+        $rules = [
+            'fecha' => 'required',
+            'nombre_colegio' => 'required',
+            'subtotal' => 'required',
+            'total' => 'required',
+            'representante_id' => 'required',
+            'tour_id' => 'required',
+            'curso_id' => 'required'
+        ];
+
+        $messages = [];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->passes()) {
+            return ControllerUtils::successResponseJson(Contrato::create($request->all()), "Contrato registrado correctamente.");
+
+        } else {
+            return ControllerUtils::errorResponseValidation($validator);
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         return Contrato::find($id);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        $contrato = Contrato::findOrFail($id);
-        $contrato->update($request->all());
 
-        return $contrato;
+        $rules = [
+            'fecha' => 'required',
+            'nombre_colegio' => 'required',
+            'subtotal' => 'required',
+            'total' => 'required',
+            'representante_id' => 'required',
+            'tour_id' => 'required',
+            'curso_id' => 'required'
+        ];
+
+        $messages = [];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->passes()) {
+
+            $contrato = Contrato::findOrFail($id);
+            $contrato->update($request->all());
+            return ControllerUtils::successResponseJson($contrato, "Contrato actualizado correctamente.");
+
+        } else {
+            return ControllerUtils::errorResponseValidation($validator);
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        $contrato = Contrato::findOrFail($id);
-        $contrato->delete();
+        try {
+            $contrato = Contrato::find($id);
 
-        return 204;
+            if ($contrato) {
+                $contrato->delete();
+                return ControllerUtils::successResponseJson(null, "Contrato eliminado correctamente.");
+            } else {
+                return ControllerUtils::errorResponseJson('El Contrato a eliminar no éxiste.');
+            }
+
+
+        } catch (\Exception $e) {
+            return ControllerUtils::errorResponseJson('Error al eliminar el contrato.');
+        }
+
     }
 }

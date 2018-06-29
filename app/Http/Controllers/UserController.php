@@ -56,19 +56,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        try{
-
-            $user = User::find($id);
-
-            if($user){
-                return ControllerUtils::successResponseJson( $user, "Usuario encontrado.");
-            }else{
-                return ControllerUtils::errorResponseJson('Usuario no encontrado.');
-            }
-
-        }catch(\Exception $e){
-            return ControllerUtils::errorResponseJson('Error al buscar el Usuario.');
-        }
+        return $user = User::find($id);
     }
 
     /**

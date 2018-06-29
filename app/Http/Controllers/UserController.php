@@ -56,7 +56,19 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        return User::find($id);
+        try{
+
+            $user = User::find($id);
+
+            if($user){
+                return ControllerUtils::successResponseJson( $user, "Usuario encontrado.");
+            }else{
+                return ControllerUtils::errorResponseJson('Usuario no encontrado.');
+            }
+
+        }catch(\Exception $e){
+            return ControllerUtils::errorResponseJson('Error al buscar el Usuario.');
+        }
     }
 
     /**
@@ -84,7 +96,7 @@ class UserController extends Controller
 
             $user = User::findOrFail($id);
             $user->update($request->all());
-            return ControllerUtils::successResponseJson($user, "Registro actualizado correctamente.");
+            return ControllerUtils::successResponseJson($user, "Usuario actualizado correctamente.");
 
         }else{
             return ControllerUtils::errorResponseValidation($validator);
@@ -99,10 +111,21 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::findOrFail($id);
-        $user->delete();
+        try{
+            $user = User::find($id);
 
-        return 204;
+            if($user){
+                $user->delete();
+                return ControllerUtils::successResponseJson(null, "Usuario eliminado correctamente.");
+            }else{
+                return ControllerUtils::errorResponseJson('El Usuario a eliminar no éxiste.');
+            }
+
+
+        }catch(\Exception $e){
+            return ControllerUtils::errorResponseJson('Error al eliminar al usuario.');
+        }
+
     }
 
 }

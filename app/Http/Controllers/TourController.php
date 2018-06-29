@@ -21,7 +21,6 @@ class TourController extends Controller
             'nombre' => 'required|min:4|string',
             'precio_base' => 'required',
             'dias' => 'required',
-            'tour_id' => 'required'
         ];
 
         $messages = [];
@@ -47,8 +46,7 @@ class TourController extends Controller
         $rules = [
             'nombre' => 'required|min:4|string',
             'precio_base' => 'required',
-            'dias' => 'required',
-            'tour_id' => 'required'
+            'dias' => 'required'
         ];
 
         $messages = [];

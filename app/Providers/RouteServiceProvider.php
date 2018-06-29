@@ -52,8 +52,8 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapWebRoutes()
     {
         Route::middleware('web')
-             ->namespace($this->namespace)
-             ->group(base_path('routes/web.php'));
+            ->namespace($this->namespace)
+            ->group(base_path('routes/web.php'));
     }
 
     /**
@@ -84,8 +84,6 @@ class RouteServiceProvider extends ServiceProvider
             Route::post('register', 'Auth\RegisterController@register');
 
 
-
-
 //USUARIOS
             Route::get('usuarios', 'UserController@index');
             Route::get('usuarios/{id}', 'UserController@show');
@@ -97,7 +95,6 @@ class RouteServiceProvider extends ServiceProvider
             Route::get('roles', 'RolController@index');
             Route::post('roles', 'RolController@store');
             Route::get('roles/{id}', 'RolController@show');
-
 
 
 //DESTINOS
@@ -113,6 +110,13 @@ class RouteServiceProvider extends ServiceProvider
             Route::post('tours', 'TourController@store');
             Route::put('tours/{id}', 'TourController@update');
             Route::delete('tours/{id}', 'TourController@destroy');
+
+//TOURS
+            Route::get('servicios-adicionales', 'ServicioAdicionalController@index');
+            Route::get('servicios-adicionales/{id}', 'ServicioAdicionalController@show');
+            Route::post('servicios-adicionales', 'ServicioAdicionalController@store');
+            Route::put('servicios-adicionales/{id}', 'ServicioAdicionalController@update');
+            Route::delete('servicios-adicionales/{id}', 'ServicioAdicionalController@destroy');
 
 
         });

@@ -26,7 +26,25 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        return User::create($request->all());
+
+        $rules = [
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:4|string',
+            'role_id' => 'required'
+        ];
+
+        $messages = [
+            'role_id.required' => 'Debes seleccionar un rol para el usuario'
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->passes()) {
+            return ControllerUtils::successResponseJson(User::create($request->all()), "Registro creado correctamente.");
+
+        }else{
+            return ControllerUtils::errorResponseValidation($validator);
+        }
     }
 
     /**

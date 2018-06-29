@@ -38,7 +38,7 @@ class User extends Authenticatable
 
 
     public function rol(){
-        return $this->belongsTo('App\Rol');
+        return $this->belongsTo(Rol::class);
     }
 
     public function generateToken()

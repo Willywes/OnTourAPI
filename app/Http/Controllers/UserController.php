@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -67,10 +68,27 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = User::findOrFail($id);
-        $user->update($request->all());
 
-        return $user;
+        $rules = [
+            'email' => 'required|email|unique:users,email,'.$request->id,
+            'role_id' => 'required',
+        ];
+
+        $messages = [
+            'role_id.required' => 'Debes seleccionar un rol para el usuario'
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->passes()) {
+
+            $user = User::findOrFail($id);
+            $user->update($request->all());
+            return ControllerUtils::successResponseJson($user, "Registro actualizado correctamente.");
+
+        }else{
+            return ControllerUtils::errorResponseValidation($validator);
+        }
     }
 
     /**

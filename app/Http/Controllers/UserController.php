@@ -11,7 +11,7 @@ class UserController extends Controller
 
     public function index()
     {
-        return User::with('rol')->get();
+        return User::with('rol')->where('id', '!=', 1)->get();
     }
 
     public function store(Request $request)

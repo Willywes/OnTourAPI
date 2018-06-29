@@ -31,11 +31,13 @@ class UserController extends Controller
         $rules = [
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:4|string',
-            'role_id' => 'required'
+            'nombres' => 'required',
+            'paterno' => 'required',
+            'rol_id' => 'required'
         ];
 
         $messages = [
-            'role_id.required' => 'Debes seleccionar un rol para el usuario'
+            'rol_id.required' => 'Debes seleccionar un rol para el usuario'
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -71,11 +73,13 @@ class UserController extends Controller
 
         $rules = [
             'email' => 'required|email|unique:users,email,'.$request->id,
-            'role_id' => 'required',
+            'nombres' => 'required',
+            'paterno' => 'required',
+            'rol_id' => 'required',
         ];
 
         $messages = [
-            'role_id.required' => 'Debes seleccionar un rol para el usuario'
+            'rol_id.required' => 'Debes seleccionar un rol para el usuario'
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);

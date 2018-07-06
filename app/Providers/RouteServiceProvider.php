@@ -84,6 +84,8 @@ class RouteServiceProvider extends ServiceProvider
             Route::post('register', 'Auth\RegisterController@register');
             Route::post('login', 'LoginController@login');
 
+            Route::get('dashboard', 'DashboardController@index');
+
 
 //USUARIOS
             Route::get('usuarios', 'UserController@index');

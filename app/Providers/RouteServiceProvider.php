@@ -82,6 +82,7 @@ class RouteServiceProvider extends ServiceProvider
 
 
             Route::post('register', 'Auth\RegisterController@register');
+            Route::post('login', 'LoginController@login');
 
 
 //USUARIOS

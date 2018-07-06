@@ -30,9 +30,13 @@ class UserController extends Controller
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
+  
+        if ($validator->passes()) {          
 
-        if ($validator->passes()) {
-            return ControllerUtils::successResponseJson(User::create($request->all()), "Usuario creado correctamente.");
+            $user = User::create($request->all());
+            $user->password = bcrypt($request->password);
+            $user->save();
+            return ControllerUtils::successResponseJson($user, "Usuario creado correctamente.");
 
         }else{
             return ControllerUtils::errorResponseValidation($validator);

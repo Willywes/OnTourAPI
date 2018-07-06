@@ -2,19 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Model\User;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
 	public function login(Request $request){
 
-		$user = User::where('email','LIKE', $request->email)->where('password','LIKE', bcrypt($request->password))->first();
-
-		if ($user) {
-            return ControllerUtils::successResponseJson($user, "Login Correcto");
-
-        } else {
+		try{
+			
+			if (Auth::attempt(['email' => $request->email, 'password' => $request->password]))
+			{
+				$user = User::where('email','=', $request->email)->first();
+				Auth::logout();
+		        return ControllerUtils::successResponseJson($user, "Login Correcto");
+			}
+			else
+			{
+				return ControllerUtils::errorResponseJson('Credenciales de acceso incorrectas');
+			}
+		} catch(\Exception $ex) {
             return ControllerUtils::errorResponseJson('Error al iniciar sesión');
         }
 	}

@@ -16,6 +16,11 @@ class LoginController extends Controller
 			{
 				$user = User::where('email','=', $request->email)->first();
 				Auth::logout();
+
+				if($user->rol_id == 5){
+                    return ControllerUtils::errorResponseJson('Ud. no esta autorizado a entrar en este sistema');
+                }
+
 		        return ControllerUtils::successResponseJson($user, "Login Correcto");
 			}
 			else
